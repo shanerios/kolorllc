@@ -2,25 +2,211 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kolor Designs LLC</title>
+
+  <!-- Basic SEO / Social -->
+  <meta name="description" content="Kolor Designs LLC — creative design & digital experiences. Publisher of Inner, a sound-based consciousness & ritual app." />
+  <meta property="og:title" content="Kolor Designs LLC" />
+  <meta property="og:description" content="Creative design & digital experiences. Publisher of Inner." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kolorwithak.com" />
+
   <style>
-    body {
-      font-family: Inter, Arial, sans-serif;
-      background: #fafafa;
-      color: #222;
-      text-align: center;
-      padding: 10vh 2rem;
+    /* Design tokens */
+    :root {
+      --bg: #0b0b0c;
+      --card: #121214;
+      --text: #e9e9ee;
+      --muted: #a1a1aa;
+      --accent: #6ee7ff;
+      --accent2: #a78bfa;
+      --ring: rgba(110, 231, 255, 0.3);
+      --radius: 20px;
+      --shadow: 0 10px 25px rgba(0,0,0,.35);
+      --maxw: 780px;
     }
-    h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-    p { max-width: 480px; margin: 0.5rem auto; line-height: 1.6; }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #fafafa;
+        --card: #ffffff;
+        --text: #151518;
+        --muted: #52525b;
+        --accent: #0ea5e9;
+        --accent2: #7c3aed;
+        --ring: rgba(14,165,233,.18);
+        --shadow: 0 10px 25px rgba(0,0,0,.08);
+      }
+    }
+
+    /* Reset + layout */
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, Apple Color Emoji, Segoe UI Emoji;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 800px at 20% -10%, rgba(167,139,250,.15), transparent 60%),
+        radial-gradient(1000px 700px at 110% 10%, rgba(110,231,255,.14), transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg));
+      display: grid;
+      place-items: center;
+      padding: 8vh 20px;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: var(--maxw);
+    }
+
+    .card {
+      background: color-mix(in oklab, var(--card) 86%, transparent);
+      backdrop-filter: blur(6px);
+      border: 1px solid color-mix(in oklab, var(--accent) 20%, transparent);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(20px, 5vw, 40px);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .glow {
+      position: absolute; inset: -40%;
+      background: radial-gradient(closest-side, color-mix(in oklab, var(--accent) 45%, transparent) 0%, transparent 60%),
+                  radial-gradient(closest-side, color-mix(in oklab, var(--accent2) 35%, transparent) 0%, transparent 65%);
+      filter: blur(60px);
+      opacity: .22;
+      z-index: -1;
+      animation: drift 14s ease-in-out infinite alternate;
+    }
+    @keyframes drift { from { transform: translateX(-6%) translateY(-4%); } to { transform: translateX(8%) translateY(6%); } }
+
+    header {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; margin-bottom: 18px;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .logo {
+      width: 42px; height: 42px; border-radius: 12px;
+      background: radial-gradient(circle at 35% 35%, var(--accent), var(--accent2) 55%, transparent 60%),
+                  linear-gradient(135deg, color-mix(in oklab, var(--card) 70%, transparent), transparent);
+      border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent);
+      box-shadow: inset 0 0 20px color-mix(in oklab, var(--accent2) 20%, transparent);
+    }
+    h1 {
+      font-weight: 700; font-size: clamp(22px, 3vw, 28px); letter-spacing: .2px; margin: 0;
+    }
+    .tag { color: var(--muted); font-size: 14px; margin-top: -2px; }
+
+    .hero {
+      margin: 18px 0 10px;
+    }
+    .hero h2 {
+      font-size: clamp(26px, 4.6vw, 40px);
+      line-height: 1.1; margin: 0 0 10px;
+      letter-spacing: .2px;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 62ch;
+    }
+
+    .cta {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      margin-top: 22px;
+    }
+    .btn {
+      appearance: none; border: 1px solid transparent; cursor: pointer;
+      background: linear-gradient(180deg, color-mix(in oklab, var(--accent) 85%, white 0%) , color-mix(in oklab, var(--accent2) 78%, black 0%));
+      color: #0a0a0a;
+      padding: 10px 16px; border-radius: 12px; font-weight: 600;
+      box-shadow: 0 6px 16px var(--ring);
+      transition: transform .12s ease, filter .12s ease, box-shadow .12s ease;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn:hover { transform: translateY(-1px); filter: saturate(110%); box-shadow: 0 10px 24px var(--ring); }
+    .btn.alt {
+      background: transparent; color: var(--text);
+      border-color: color-mix(in oklab, var(--text) 18%, transparent);
+      box-shadow: none;
+    }
+
+    .grid {
+      margin-top: 30px;
+      display: grid; gap: 14px;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 720px) {
+      .grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .tile {
+      border: 1px solid color-mix(in oklab, var(--text) 12%, transparent);
+      border-radius: 14px; padding: 14px 14px;
+      background: color-mix(in oklab, var(--card) 92%, transparent);
+    }
+    .tile h3 { margin: 6px 0 6px; font-size: 16px; }
+    .tile p { margin: 0; font-size: 14px; color: var(--muted); }
+
+    footer {
+      margin-top: 22px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+      color: var(--muted); font-size: 13px;
+    }
+    a.link { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
   </style>
 </head>
 <body>
-  <h1>Kolor Designs LLC</h1>
-  <p>Creative design and digital experience studio based in the United States.</p>
-  <p>Official developer and publisher of <strong>Inner</strong> — a sound-based consciousness and ritual app.</p>
-  <p>Contact: <a href="mailto:info@kolorwithak.com">info@kolorwithak.com</a></p>
-  <footer style="margin-top:1rem; font-size:0.8rem;">© 2025 Kolor Designs LLC</footer>
+  <div class="wrap">
+    <div class="card">
+      <div class="glow" aria-hidden="true"></div>
+
+      <header>
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <h1>Kolor Designs LLC</h1>
+            <div class="tag">Creative design & digital experiences</div>
+          </div>
+        </div>
+      </header>
+
+      <section class="hero">
+        <h2>We design quiet, premium experiences that feel inevitable.</h2>
+        <p>
+          Kolor Designs LLC is the studio behind <strong>Inner</strong> — a sound-based consciousness and ritual app.
+          We build focused products with minimal surfaces and deep intent.
+        </p>
+
+        <div class="cta">
+          <a class="btn" href="https://getinner.app" rel="noopener">Explore Inner</a>
+          <a class="btn alt" href="mailto:info@kolorwithak.com">Contact</a>
+        </div>
+      </section>
+
+      <section class="grid">
+        <div class="tile">
+          <h3>Studio</h3>
+          <p>Design systems, brand architecture, and interface craft for thoughtful products.</p>
+        </div>
+        <div class="tile">
+          <h3>Experiments</h3>
+          <p>Audio UX, ritual interfaces, and adaptive ambient systems.</p>
+        </div>
+        <div class="tile">
+          <h3>Publisher</h3>
+          <p><em>Inner</em> — a guided journey into breath, sound, and gentle awareness.</p>
+        </div>
+      </section>
+
+      <footer>
+        <div>© 2025 Kolor Designs LLC</div>
+        <div><a class="link" href="mailto:info@kolorwithak.com">info@kolorwithak.com</a></div>
+      </footer>
+    </div>
+  </div>
 </body>
 </html>
